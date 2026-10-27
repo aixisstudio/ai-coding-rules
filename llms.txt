@@ -31,4 +31,16 @@ Maintained by aixisstudio. Related: Snitch (open-source app firewall). https://g
 
 ## ⚠️ Caveats
 - Benchmarks get gamed — check contamination & eval methodology
-- Arena ELO reflects taste, not task fit — te
+- Arena ELO reflects taste, not task fit — test on *your* workload
+- Build an internal eval set early — 20 real examples beat leaderboard browsing
+
+## 🆕 Current frontier benchmarks
+
+| Benchmark | Tests |
+|---|---|
+| SWE-bench Verified | Real GitHub issue fixes |
+| ARC-AGI | Abstract reasoning |
+| GPQA | Graduate-level science |
+| FrontierMath | Research math |
+| Humanity's Last Exam | Cross-domain expert |
+| Terminal-Bench | CLI agentic task
