@@ -38,6 +38,24 @@ _Подробное содержимое (списки, ссылки, описа
 - Arena ELO reflects taste, not task fit — test on *your* workload
 - Build an internal eval set early — 20 real examples beat leaderboard browsing
 
+## 🆕 Current frontier benchmarks
+
+| Benchmark | Tests |
+|---|---|
+| SWE-bench Verified | Real GitHub issue fixes |
+| ARC-AGI | Abstract reasoning |
+| GPQA | Graduate-level science |
+| FrontierMath | Research math |
+| Humanity's Last Exam | Cross-domain expert |
+| Terminal-Bench | CLI agentic tasks |
+
+## 📊 Live leaderboards
+
+- [LMArena](https://lmarena.ai/) — blind human preference
+- [Artificial Analysis](https://artificialanalysis.ai/) — speed/cost/quality
+- [LiveBench](https://livebench.ai/) — contamination-free
+- [Open LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard) — HF's
+
 ---
 ## Участие
 
