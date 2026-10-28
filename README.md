@@ -1,58 +1,69 @@
-# Awesome Ai Benchmarks
+# Ai Coding Rules
 
 **English** | [Français](README.fr.md) | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Русский](README.ru.md)
 
-LLM benchmarks & evaluation tools — measure what matters
+Cursor rules, CLAUDE.md, AGENTS.md & .windsurfrules — config files that make AI coders smarter
 
-## 🏆 LLM benchmarks
-| Benchmark | Measures |
+## 📐 What this is
+
+The dotfiles of the AI era: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — the project-level config that makes AI coding tools actually understand your codebase.
+
+The difference between a useless AI suggestion and a great one is usually this file.
+
+## 📁 The collection
+
+### By tool
+| File | Tool | Loaded |
+|---|---|---|
+| `CLAUDE.md` | Claude Code | Automatically, repo root |
+| `.cursor/rules/*.mdc` | Cursor | Glob-matched or always |
+| `AGENTS.md` | OpenAI Codex, others | Emerging standard |
+| `.windsurfrules` | Windsurf | Project root |
+| `.github/copilot-instructions.md` | Copilot | Workspace |
+| `.continue/config` | Continue | IDE config |
+| `.aider.conf.yml` | Aider | CLI config |
+
+### By stack — ready-made templates
+| Template | Best lines inside |
 |---|---|
-| MMLU | Broad knowledge (multiple choice) |
-| GPQA | Graduate-level reasoning |
-| HumanEval / MBPP | Code generation |
-| SWE-bench | Real repo issue fixing — the one that matters |
-| MMLU-Pro | Harder MMLU |
-| Chatbot Arena (LMSYS) | Human-preference ELO — most trusted |
-| ARC-AGI | Novel reasoning |
-| MT-Bench | Multi-turn conversation |
+| `python-fastapi.md` | pydantic v2 syntax, async patterns, no print() — use logging |
+| `typescript-nextjs.md` | app router conventions, server components default, zod validation |
+| `rust-cli.md` | clap v4, anyhow vs thiserror split |
+| `go-service.md` | standard layout, no global state |
+| `react-vite.md` | hooks rules, tanstack-query for fetching |
 
-## 🧰 Eval frameworks
-| Tool | Note |
-|---|---|
-| [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness) | The standard OSS harness |
-| [OpenAI evals](https://github.com/openai/evals) | OpenAI's framework |
-| [DeepEval](https://github.com/confident-ai/deepeval) | pytest-style LLM tests |
-| [RAGAS](https://github.com/explodinggradients/ragas) | RAG-specific metrics |
-| [promptfoo](https://github.com/promptfoo/promptfoo) | Prompt CI/CD testing |
-| [Langfuse](https://github.com/langfuse/langfuse) | Observability + evals |
+## ✍️ What a great rules file contains
 
-## 📐 Image/other
-- **ImageNet, COCO** — classics
-- **GenEval, TIFA** — image-gen evals
-- **ASR (WER)** — speech transcription error rate
+```markdown
+# Project: Acme API
 
-## ⚠️ Caveats
-- Benchmarks get gamed — check contamination & eval methodology
-- Arena ELO reflects taste, not task fit — test on *your* workload
-- Build an internal eval set early — 20 real examples beat leaderboard browsing
+## Stack
+FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
 
-## 🆕 Current frontier benchmarks
+## Conventions
+- All endpoints return Pydantic schemas, never dicts
+- DB access only through `db/repositories/`
+- No `print()` — `structlog` only
+- Commits: conventional format (`feat:`, `fix:`)
 
-| Benchmark | Tests |
-|---|---|
-| SWE-bench Verified | Real GitHub issue fixes |
-| ARC-AGI | Abstract reasoning |
-| GPQA | Graduate-level science |
-| FrontierMath | Research math |
-| Humanity's Last Exam | Cross-domain expert |
-| Terminal-Bench | CLI agentic tasks |
+## Commands
+- Test: `pytest -xvs`
+- Lint: `ruff check --fix`
+- Run dev: `uvicorn app:app --reload`
 
-## 📊 Live leaderboards
+## Never do
+- Don't add deps without asking
+- Don't modify migrations by hand — alembic generates them
+- Don't commit `.env`
+```
 
-- [LMArena](https://lmarena.ai/) — blind human preference
-- [Artificial Analysis](https://artificialanalysis.ai/) — speed/cost/quality
-- [LiveBench](https://livebench.ai/) — contamination-free
-- [Open LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard) — HF's
+## 🧠 Rules that measurably help (community-tested)
+
+1. **Commands section** — the AI stops guessing how to run tests
+2. **"Never do" list** — negative constraints prevent the worst diffs
+3. **One-file-per-domain** in `.cursor/rules` with globs: `frontend/*.mdc` → `**/*.tsx`
+4. **Link, don't paste** — reference real files: `@src/db/base.py` as the ORM example
+5. **Keep under 150 lines** — longer rules get ignored/truncated
 
 ---
 Maintained by [aixisstudio](https://github.com/aixisstudio) — author of [Snitch](https://github.com/aixisstudio/Snitch), the open-source application firewall.
