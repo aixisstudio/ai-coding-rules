@@ -1,58 +1,69 @@
-# Awesome Ai Benchmarks
+# Ai Coding Rules
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | **Русский**
 
-Бенчмарки и оценка LLM
+Правила для Cursor, CLAUDE.md, AGENTS.md
 
-##LLM бенчмарки
-[править править код]
+###Что это такое
+
+Точечные файлы эпохи ИИ: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — конфигурация проектного уровня, которая позволяет инструментам кодирования ИИ фактически понимать вашу кодовую базу.
+
+Разница между бесполезным предложением ИИ и отличным обычно заключается в этом файле.
+
+###Коллекция
+
+### Инструмент
+Скачать игру Tool Loaded
+|---|---|---|
+| `CLAUDE.md` | Claude Code | Автоматически, repo root |
+| `.cursor/rules/*.mdc` | Cursor | Glob-совместимый или всегда |
+| `AGENTS.md` | OpenAI Codex, другие | Новые стандарты |
+| `.windsurfrules` | Windsurf | Корень проекта
+`.github/copilot-instructions.md` | Copilot | Workspace
+| `.continue/config` | Continue | IDE config |
+| `.aider.conf.yml` | Aider | CLI конфигурация |
+
+### By stack — готовые шаблоны
+Лучшие строки внутри
 |---|---|
-MMLU - Широкие знания (множественный выбор)
-| GPQA | Размышления на уровне выпускников
-MBPP / HumanEval - генерация кода
-[править править код] Реальный репо — тот, который имеет значение
-MMLU-Pro - более жесткий MMLU
-• Chatbot Arena (LMSYS) — наиболее доверенная
-| ARC-AGI | Новые рассуждения
-MT-Bench - многоповоротный разговор
+| `python-fastapi.md` | pydantic v2 syntax, async patterns, no print() — используйте logging |
+| `typescript-nextjs.md` | соглашения маршрутизатора приложений, серверные компоненты по умолчанию, валидация зондов |
+| `rust-cli.md` | хлопок v4, как бы то ни было, vs это разделение
+| `go-service.md` | стандартная компоновка без глобального состояния |
+| `react-vite.md` | правила крючков, запрос танстака для извлечения |
 
-##  framework фреймворки Eval
-| Инструмент | Примечание
-|---|---|
-[lm-eval-harness] (https://github.com/EleutherAI/lm-evaluation-harness) Стандартная ОСС упряжка.
-| [OpenAI evals] (https://github.com/openai/evals) | Рамки OpenAI |
-[DeepEval] (https://github.com/confident-ai/deepeval) | тесты LLM в стиле pytest
-| [RAGAS] (https://github.com/explodinggradients/ragas) | RAG-специфические метрики |
-| [promptfoo] (https://github.com/promptfoo/promptfoo) | Быстрое тестирование CI/CD
-| [Langfuse] (https://github.com/langfuse/langfuse) | Наблюдение + эвалы |
+##  a️ Какой файл правил
 
-##   Изображение/другое
-**ImageNet, COCO** — классика
-- **GenEval, TIFA** - Имидж-ген
-**ASR (WER)** — частота ошибок транскрипции речи
+```markdown
+# Project: Acme API
 
-##  ️ Пещеры
-- Benchmarks get gamed - check contamination & eval methodology (недоступная ссылка)
-- Arena ELO отражает вкус, а не соответствие задач - тест на *вашу* рабочую нагрузку
-Постройте внутренний эйвальный набор рано — 20 реальных примеров превзошли просмотр таблицы лидеров
+## Stack
+FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
 
-##   Текущие пограничные ориентиры
+## Conventions
+- All endpoints return Pydantic schemas, never dicts
+- DB access only through `db/repositories/`
+- No `print()` — `structlog` only
+- Commits: conventional format (`feat:`, `fix:`)
 
-Тестирование.
-|---|---|
-Проверено с помощью SWE-bench / Real GitHub
-| ARC-AGI | Абстрактные рассуждения |
-| GPQA | Наука высшего уровня |
-FrontierMath - Исследовательская математика
-Оригинальное название: Humanity's Last Exam
-| Терминал-секция | CLI агентные задачи |
+## Commands
+- Test: `pytest -xvs`
+- Lint: `ruff check --fix`
+- Run dev: `uvicorn app:app --reload`
 
-###Живые таблицы лидеров
+## Never do
+- Don't add deps without asking
+- Don't modify migrations by hand — alembic generates them
+- Don't commit `.env`
+```
 
-- [LMArena] (https://lmarena.ai/) - предпочтение слепого человека
-- [Искусственный анализ] (https://artificialanalysis.ai/) - скорость/стоимость/качество
-- [LiveBench] (https://livebench.ai/) - без загрязнения
-- [Open LLM Leaderboard] (https://huggingface.co/spaces/open-llm-leaderboard) - HF's
+## ) Правила, которые могут помочь (проверено сообществом)
+
+1. ** Командный раздел** — ИИ перестает гадать, как запускать тесты
+2. ** "Никогда не делай" список ** - отрицательные ограничения предотвращают худшие диффы
+3. ** Один файл на домен** в `.cursor/rules` с шарами: `frontend/*.mdc` → `**/*.tsx`
+4. **Ссылка, не вставляйте ** — ссылки на реальные файлы: `@src/db/base.py` в качестве примера ORM
+5. ** Держите под 150 строк ** - более длинные правила игнорируются / усечены
 
 ---
 ## Участие
