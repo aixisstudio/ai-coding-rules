@@ -1,71 +1,58 @@
-# Ai Coding Rules
+# Awesome Ai Benchmarks
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | **中文** | [日本語](README.ja.md) | [Русский](README.ru.md)
 
-Cursor 规则、CLAUDE.md、AGENTS.md 配置集
+LLM 基准与评测工具
 
-_详细内容（列表、链接、描述）以英文维护 — 以下章节为你指引。_
-
-## 📐 What this is
-
-The dotfiles of the AI era: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — the project-level config that makes AI coding tools actually understand your codebase.
-
-The difference between a useless AI suggestion and a great one is usually this file.
-
-## 📁 The collection
-
-### By tool
-| File | Tool | Loaded |
-|---|---|---|
-| `CLAUDE.md` | Claude Code | Automatically, repo root |
-| `.cursor/rules/*.mdc` | Cursor | Glob-matched or always |
-| `AGENTS.md` | OpenAI Codex, others | Emerging standard |
-| `.windsurfrules` | Windsurf | Project root |
-| `.github/copilot-instructions.md` | Copilot | Workspace |
-| `.continue/config` | Continue | IDE config |
-| `.aider.conf.yml` | Aider | CLI config |
-
-### By stack — ready-made templates
-| Template | Best lines inside |
+□□□ LLM基准
+基准 措施
 |---|---|
-| `python-fastapi.md` | pydantic v2 syntax, async patterns, no print() — use logging |
-| `typescript-nextjs.md` | app router conventions, server components default, zod validation |
-| `rust-cli.md` | clap v4, anyhow vs thiserror split |
-| `go-service.md` | standard layout, no global state |
-| `react-vite.md` | hooks rules, tanstack-query for fetching |
+广义知识(多种选择)
+GPQA 研究生的推理
+/ MBPP 代码生成
+SWE-bench 真正的Repo 发行修复——那个很重要的
+MMLU - Pro 更难的MMLU
+Chatbot Arena(LMSYS) 人类偏爱ELO——最信任的 QQ
+ARC-AGI 小说推理
+MT -Bench 多回合对话
 
-## ✍️ What a great rules file contains
+# # # # Eval 框架
+* * * 工具 * * 注 * *
+|---|---|
+[lm-eval-harness] (https://github.com/EleutherAI/lm-evaluation-harness) [lm-eval-harness] [urLPH0X] [lm-eval-harness] [lm-eval-harness] (urLPH0X] [lm-eval-harness] [lm-eval-harness] (urLPH0X] [lm-eval-harness] [l-eval-harness] (urLPH0X] [urLPH0X] [l-l-] [l-eval-] [l-val-harness] [l-] (urLPH0X] [l-] [l-]] 标准OSS套装
+[OpenAI evals] (https://github.com/openai/evals) | OpenAI的框架 |
+[深极] (https://github.com/confident-ai/deepeval) | pytest-tyle LLM测试 |
+[RAGAS] (https://github.com/explodinggradients/ragas) +++ RAG特定度量标准 +++
+(https://github.com/promptfoo/promptfoo) 快速CI/CD测试
+[Langfuse] (https://github.com/langfuse/langfuse) + 观察 + evals + |
 
-```markdown
-# Project: Acme API
+# # # # # 图像/ 其他
+- ** ImageNet,COCO**——经典
+- **GenEval,TIFA**——图像源电子vals
+- ** ASR(WER)**——语音转录错误率
 
-## Stack
-FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
+□□□□ 洞穴
+- 制定基准——检查污染和eval方法
+- Arena ELO 反映品味,不适宜任务——测试你的工作量
+- 早期构建一个内部的 eval 集 - 20 个真正的实例击败领导板浏览
 
-## Conventions
-- All endpoints return Pydantic schemas, never dicts
-- DB access only through `db/repositories/`
-- No `print()` — `structlog` only
-- Commits: conventional format (`feat:`, `fix:`)
+□ □ □ 现行边界基准
 
-## Commands
-- Test: `pytest -xvs`
-- Lint: `ruff check --fix`
-- Run dev: `uvicorn app:app --reload`
+基准 测试 +++
+|---|---|
+校对:Soup
+ARC-AGI 抽象推理
+GPQA 研究生科学
+研究数学
+人类的最后考试 跨领域专家
+QQ 终端- Bench 的 CLI 代理任务 QQ
 
-## Never do
-- Don't add deps without asking
-- Don't modify migrations by hand — alembic generates them
-- Don't commit `.env`
-```
+□□□□□□□□□□□□
 
-## 🧠 Rules that measurably help (community-tested)
-
-1. **Commands section** — the AI stops guessing how to run tests
-2. **"Never do" list** — negative constraints prevent the worst diffs
-3. **One-file-per-domain** in `.cursor/rules` with globs: `frontend/*.mdc` → `**/*.tsx`
-4. **Link, don't paste** — reference real files: `@src/db/base.py` as the ORM example
-5. **Keep under 150 lines** — longer rules get ignored/truncated
+- [LMArena](https://lmarena.ai/)——盲目的人类偏好
+- [人工分析](https://artificialanalysis.ai/)——速度/成本/质量
+- [活奔驰](https://livebench.ai/)——无污染.
+- [开放LLM导板] (https://huggingface.co/spaces/open-llm-leaderboard)——高频
 
 ---
 ## 贡献
