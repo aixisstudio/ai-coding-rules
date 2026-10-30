@@ -1,58 +1,69 @@
-# Awesome Ai Benchmarks
+# Ai Coding Rules
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [中文](README.zh-CN.md) | **日本語** | [Русский](README.ru.md)
 
-LLM ベンチマークと評価ツール
+Cursor ルール・CLAUDE.md・AGENTS.md 集
 
-LLMベンチマーク
-| ベンチマーク | 対策 |
+##  What これは何ですか?
+
+AI時代のドットファイル:**`CLAUDE.md`、`.cursor/rules`、`AGENTS.md`、`.windsurfrules`、`.github/copilot-instructions.md`** - AIコーディングツールが実際にあなたのコードベースを理解するプロジェクトレベルの構成。
+
+役に立たないAI提案と素晴らしいものの違いは、通常このファイルです。
+
+## 📁コレクション
+
+### ツールで
+| ファイル | ツール | ロード |
+|---|---|---|
+| `CLAUDE.md` | クロードコード | オートマチック・レポルート |
+| `.cursor/rules/*.mdc` | キュラー | グローブマッチ・アンド・いつも |
+| `AGENTS.md` | OpenAI Codex 他 | 新興規格 |
+| `.windsurfrules` | ウィンドサーフィン | プロジェクトルート |
+| `.github/copilot-instructions.md` | コピロット | ワークスペース |
+| `.continue/config` | 続き | IDEの構成 |
+| `.aider.conf.yml` | エイダー | クリコンフィグ |
+
+### スタックによる — 既製のテンプレート
+| テンプレート | 内側のベストライン |
 |---|---|
-| MMLU | 幅広い知識 |
-| GPQA | 大学院レベルの推論 |
-| ヒューマンイーバル / MBPP | コード生成 |
-| SWE-bench | リアルレポ問題の修正 |
-| MMLU-Pro | より硬いMMLU |
-| チャットボット・アリーナ(LMSYS) | 人間好みのELO - 最も信頼される |
-| ARC-AGI | ノベル推論 |
-| MT-Bench | マルチターン会話 |
+| `python-fastapi.md` | pydantic v2 構文, async パターン, no print() — 使用 ロギング |
+| `typescript-nextjs.md` | アプリルータ規約、サーバコンポーネントのデフォルト、zod検証 |
+| `rust-cli.md` | clap v4、何とか対この恐怖の割れ目 |
+| `go-service.md` | 標準レイアウト | グローバルな状態 |
+| `react-vite.md` | ホークルール・タンスタククリ |
 
-## Evalフレームワーク
-| ツール | ノート |
-|---|---|
-| [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness) | 標準OSSハーネス |
-| 【OpenAI evals】(https://github.com/openai/evals) | OpenAIのフレームワーク |
-| [DeepEval](https://github.com/confident-ai/deepeval) | pytest-style LLMテスト |
-| 【RAGAS】(https://github.com/explodinggradients/ragas) | RAG専用メトリック |
-| [promptfoo](https://github.com/promptfoo/promptfoo) | プロンプト CI/CD テスト |
-| [Langfuse](https://github.com/langfuse/langfuse) | 観察性+無効 |
+## 本当に素晴らしいルールファイルが含まれています
 
-## 📐 イメージ/その他
-- **ImageNet, COCO** — 古典
-- **GenEval, TIFA** — イメージ・ジェネラル
--**ASR(WER)** — スピーチの転写エラー率
+```markdown
+# Project: Acme API
 
-## ✨ 洞窟
-- ベンチマークがゲームをゲット — 汚染と楕円形の方法論をチェック
-- 闘技場ELOは、味を反映します, ないタスクフィット — *your*のワークロードのテスト
-- 初期に内部の楕円セットを構築 — 20 実際の例は、リーダーボードの閲覧をビートします
+## Stack
+FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
 
-##現在のフロンティアベンチマーク
+## Conventions
+- All endpoints return Pydantic schemas, never dicts
+- DB access only through `db/repositories/`
+- No `print()` — `structlog` only
+- Commits: conventional format (`feat:`, `fix:`)
 
-| ベンチマーク | テスト |
-|---|---|
-| SWE-bench 検証 | 実際のGitHubの問題修正 |
-| ARC-AGI | 抽象的な推論 |
-| GPQA | 大学院レベルの科学 |
-| フロンティア数学 | 研究数学 |
-| 人類最後の試験 | クロスドメインの専門家 |
-| ターミナルベンチ | クリエイティカルタスク |
+## Commands
+- Test: `pytest -xvs`
+- Lint: `ruff check --fix`
+- Run dev: `uvicorn app:app --reload`
 
-## ライブリーダーボード
+## Never do
+- Don't add deps without asking
+- Don't modify migrations by hand — alembic generates them
+- Don't commit `.env`
+```
 
-- [LMArena](https://lmarena.ai/) — 盲目の人間の好み
-- [構造解析](https://artificialanalysis.ai/) — スピード/コスト/品質
-- [LiveBench](https://livebench.ai/) — 汚染のない
-- [LLM リーダーボードを開く](https://huggingface.co/spaces/open-llm-leaderboard) — HF の
+# # # 間違いなく助けるルール (コミュニティテスト済み)
+
+1.**Commands セクション** — AI はテストを実行する方法の推測を停止します
+2.**"Never do" list** — 負の制約は最悪の差を防ぎます
+3。**`.cursor/rules`の1ファイルごとのドメイン**:`frontend/*.mdc` → `**/*.tsx`
+4。 **リンク、貼り付けないでください** — 実際のファイルを参照: ORM 例として`@src/db/base.py`
+5。**150行未満** - 長いルールは無視/調整される
 
 ---
 ## 貢献
