@@ -1,58 +1,69 @@
-# Awesome Ai Benchmarks
+# Ai Coding Rules
 
 [English](README.md) | [Français](README.fr.md) | **Español** | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Русский](README.ru.md)
 
-Benchmarks y evaluación de LLMs
+Reglas para Cursor, CLAUDE.md y AGENTS.md
 
-## 🏆 LLM benchmarks
-TEN TERRITORIO FORMULAR MEDIDAS
+Lo que es
+
+Los ficheros de la era AI: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — el config a nivel de proyecto que hace que las herramientas de codificación AI entiendan realmente su base de código.
+
+La diferencia entre una sugerencia de AI inútil y una gran es generalmente este archivo.
+
+## 📁 La colección
+
+### By tool
+← Archivo Silencioso Silencioso
+|---|---|---|
+TENIDO `CLAUDE.md` TENIDO Código Claude TEN automáticamente, repo root TEN
+Silencio `.cursor/rules/*.mdc` Silencio Cursor Silencio Glob-matched or always ←
+← `AGENTS.md` Silencio OpenAI Codex, otros ¦
+Silencio `.windsurfrules`
+Silencio `.github/copilot-instructions.md`
+Silencio `.continue/config`
+Silencio `.aider.conf.yml`
+
+## By stack — ready-made templates
+Plantilla Silencioso Las mejores líneas dentro de Silencio
 |---|---|
-← MMLU ← Conocimiento amplio (eleccion múltiple)
-TEN GPQA TENIDO Razonamiento a nivel de posgrado
-Silencio HumanEval / MBPP Silencio Código generación
-Silencio SWE-bench Silencio Real solución de problemas de reposo - el que importa
-MMLU-Pro tóxico más duro MMLU
-Silencio Chatbot Arena (LMSYS)
-Silencio ARC-AGI
-Silencio MT-Bench Silencio conversación multi-volución
+← `python-fastapi.md` Silencio pydantic v2 sintaxis, patrones de asinc, no print() — use logging ←
+← `typescript-nextjs.md` Silencioso aplicación de las convenciones de router, componentes del servidor por defecto, validación de zod
+Silencio `rust-cli.md` Silencio clap v4, de todos modos vs este terror split Silencio
+← `go-service.md` Silencioso diseño estándar, no global estado ←
+confidencialidad `react-vite.md` Silencioso ganchos reglas, tanstack-query for fetching
 
-## 🧰 Eval frameworks
-← Herramienta Silenciosa
-|---|---|
-[lm-eval-harness] (https://github.com/EleutherAI/lm-evaluation-harness) El arnés estándar OSS
-[OpenAI evals] (https://github.com/openai/evals)
-Silencio [DeepEval] (https://github.com/confident-ai/deepeval)
-[RAGAS] (https://github.com/explodinggradients/ragas)
-Silencio [promptfoo] (https://github.com/promptfoo/promptfoo)
-Silencio [Langfuse] (https://github.com/langfuse/langfuse)
+Qué gran archivo de reglas contiene
 
-## 📐 Image/other
-**ImageNet, COCO** — clásicos
-- GenEval, TIFA** - Evalaciones de imagen-gen
-- **ASR (WER)** - tasa de error de transcripción del discurso
+```markdown
+# Project: Acme API
 
-Caveats
-- Los puntos de referencia se juegan: compruebe la contaminación y la metodología eval
-- Arena ELO refleja el gusto, no la tarea adecuada - prueba de *su carga*
-- Construir un conjunto de eval interno temprano - 20 ejemplos reales beat leaderboard navegar
+## Stack
+FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
 
-## 🆕 Puntos de referencia de fronteras actuales
+## Conventions
+- All endpoints return Pydantic schemas, never dicts
+- DB access only through `db/repositories/`
+- No `print()` — `structlog` only
+- Commits: conventional format (`feat:`, `fix:`)
 
-← Tests sobre la vida
-|---|---|
-Silencio SWE-bench Verified ← Real GitHub issue fixes ←
-Silencio ARC-AGI Silencio Resumen razonamiento
-Silencio GPQA Silencio Ciencia a nivel de posgrado
-FrontierMath ← Investigación matemáticas
-El último examen de la humanidad Silencioso experto en el dominio cruzado
-← Terminal-Comencé Silencio CLI tareas de agente
+## Commands
+- Test: `pytest -xvs`
+- Lint: `ruff check --fix`
+- Run dev: `uvicorn app:app --reload`
 
-## 📊 Live leaderboards
+## Never do
+- Don't add deps without asking
+- Don't modify migrations by hand — alembic generates them
+- Don't commit `.env`
+```
 
-- [LMArena] (https://lmarena.ai/) - preferencia humana ciega
-- [Análisis Artificial] (https://artificialanalysis.ai/) - velocidad/costo/calidad
-- [LiveBench] (https://livebench.ai/) - sin contaminación
-- [Open LLM Leaderboard] (https://huggingface.co/spaces/open-llm-leaderboard) - HF's
+## 🧠 Rules that measurably help (community-tested)
+
+1. **Sección de clientes** — la AI deja de adivinar cómo realizar pruebas
+2. **"Nunca hacer" lista** — las restricciones negativas impiden los peores problemas
+3. **Un archivo por dominio** en `.cursor/rules` con globs: `frontend/*.mdc` → `**/*.tsx`
+4. **Link, no pega** — referencia archivos reales: `@src/db/base.py` como el ejemplo ORM
+5. **Manténgase bajo 150 líneas**; las reglas más largas se ignoran/ truncan
 
 ---
 ## Contribuir
