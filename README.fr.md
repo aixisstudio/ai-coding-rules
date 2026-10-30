@@ -1,71 +1,58 @@
-# Ai Coding Rules
+# Awesome Ai Benchmarks
 
 [English](README.md) | **Français** | [Español](README.es.md) | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Русский](README.ru.md)
 
-Rules Cursor, CLAUDE.md, AGENTS.md — la config qui rend les IA de code plus malines
+Benchmarks & évaluation de LLM — mesurer ce qui compte
 
-_Le contenu détaillé (listes, liens, descriptions) est en anglais pour rester maintenable — les sections ci-dessous te guident._
-
-## 📐 What this is
-
-The dotfiles of the AI era: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — the project-level config that makes AI coding tools actually understand your codebase.
-
-The difference between a useless AI suggestion and a great one is usually this file.
-
-## 📁 The collection
-
-### By tool
-| File | Tool | Loaded |
-|---|---|---|
-| `CLAUDE.md` | Claude Code | Automatically, repo root |
-| `.cursor/rules/*.mdc` | Cursor | Glob-matched or always |
-| `AGENTS.md` | OpenAI Codex, others | Emerging standard |
-| `.windsurfrules` | Windsurf | Project root |
-| `.github/copilot-instructions.md` | Copilot | Workspace |
-| `.continue/config` | Continue | IDE config |
-| `.aider.conf.yml` | Aider | CLI config |
-
-### By stack — ready-made templates
-| Template | Best lines inside |
+Référence LLM
+Mesures de référence
 |---|---|
-| `python-fastapi.md` | pydantic v2 syntax, async patterns, no print() — use logging |
-| `typescript-nextjs.md` | app router conventions, server components default, zod validation |
-| `rust-cli.md` | clap v4, anyhow vs thiserror split |
-| `go-service.md` | standard layout, no global state |
-| `react-vite.md` | hooks rules, tanstack-query for fetching |
+MMLU= Connaissances générales (choix multiple)=
+GPQA: raisonnement des diplômés
+Génération de codes
+SWE-bench) Réalité de la fixation de la remise — celle qui compte
+Plus dur
+Chatbot Arena (LMSYS)
+ARC-AGI) Nouveau raisonnement
+Une conversation multi-tours
 
-## ✍️ What a great rules file contains
+Cadres Eval
+Remarque
+|---|---|
+(https://github.com/EleutherAI/lm-evaluation-harness) Le harnais standard OSS
+[Evales OpenAI](https://github.com/openai/evals) framework d'OpenAI
+[DeepEval](https://github.com/confident-ai/deepeval)= Tests LLM de style pytest
+[RAGAS](https://github.com/explodinggradients/ragas)= Paramètres spécifiques au RAG=
+[promptfoo](https://github.com/promptfoo/promptfoo)
+[Langfuse] (https://github.com/langfuse/langfuse)
 
-```markdown
-# Project: Acme API
+Image/autre
+- **ImageNet, COCO** — classiques
+- **GenEval, TIFA** — Evales image-gen
+- **ASR (WER)** — taux d'erreur de transcription vocale
 
-## Stack
-FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
+Les grottes
+- Benchmarks se gamed — vérifier la contamination et la méthodologie d'évaluation
+- Arena ELO reflète le goût, pas l'ajustement des tâches — test sur *votre* charge de travail
+- Construisez un jeu d'évalons interne tôt — 20 exemples réels battez la navigation leaderboard
 
-## Conventions
-- All endpoints return Pydantic schemas, never dicts
-- DB access only through `db/repositories/`
-- No `print()` — `structlog` only
-- Commits: conventional format (`feat:`, `fix:`)
+## Cote de référence des frontières actuelles
 
-## Commands
-- Test: `pytest -xvs`
-- Lint: `ruff check --fix`
-- Run dev: `uvicorn app:app --reload`
+Tests de référence
+|---|---|
+SWE-bench Vérifiés Real GitHub correctifs
+ARC-AGI) raisonnement abstrait
+Sciences supérieures
+FrontierMathématiques de recherche
+Dernier examen de l'humanité
+Tâches d'agent CLI
 
-## Never do
-- Don't add deps without asking
-- Don't modify migrations by hand — alembic generates them
-- Don't commit `.env`
-```
+Tableau de bord en direct
 
-## 🧠 Rules that measurably help (community-tested)
-
-1. **Commands section** — the AI stops guessing how to run tests
-2. **"Never do" list** — negative constraints prevent the worst diffs
-3. **One-file-per-domain** in `.cursor/rules` with globs: `frontend/*.mdc` → `**/*.tsx`
-4. **Link, don't paste** — reference real files: `@src/db/base.py` as the ORM example
-5. **Keep under 150 lines** — longer rules get ignored/truncated
+- [LMArena](https://lmarena.ai/) — préférence humaine aveugle
+- [Analyse artificielle] (https://artificialanalysis.ai/) — vitesse/coût/qualité
+- [LiveBench](https://livebench.ai/) — sans contamination
+- [Open LLM Leaderboard] (https://huggingface.co/spaces/open-llm-leaderboard) — HF's
 
 ---
 ## Contribuer
