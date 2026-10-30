@@ -1,71 +1,58 @@
-# Ai Coding Rules
+# Awesome Ai Benchmarks
 
 [English](README.md) | [Français](README.fr.md) | **Español** | [中文](README.zh-CN.md) | [日本語](README.ja.md) | [Русский](README.ru.md)
 
-Reglas para Cursor, CLAUDE.md y AGENTS.md
+Benchmarks y evaluación de LLMs
 
-_El contenido detallado (listas, enlaces, descripciones) está en inglés por mantenibilidad — las secciones siguientes te guían._
-
-## 📐 What this is
-
-The dotfiles of the AI era: **`CLAUDE.md`, `.cursor/rules`, `AGENTS.md`, `.windsurfrules`, `.github/copilot-instructions.md`** — the project-level config that makes AI coding tools actually understand your codebase.
-
-The difference between a useless AI suggestion and a great one is usually this file.
-
-## 📁 The collection
-
-### By tool
-| File | Tool | Loaded |
-|---|---|---|
-| `CLAUDE.md` | Claude Code | Automatically, repo root |
-| `.cursor/rules/*.mdc` | Cursor | Glob-matched or always |
-| `AGENTS.md` | OpenAI Codex, others | Emerging standard |
-| `.windsurfrules` | Windsurf | Project root |
-| `.github/copilot-instructions.md` | Copilot | Workspace |
-| `.continue/config` | Continue | IDE config |
-| `.aider.conf.yml` | Aider | CLI config |
-
-### By stack — ready-made templates
-| Template | Best lines inside |
+## 🏆 LLM benchmarks
+TEN TERRITORIO FORMULAR MEDIDAS
 |---|---|
-| `python-fastapi.md` | pydantic v2 syntax, async patterns, no print() — use logging |
-| `typescript-nextjs.md` | app router conventions, server components default, zod validation |
-| `rust-cli.md` | clap v4, anyhow vs thiserror split |
-| `go-service.md` | standard layout, no global state |
-| `react-vite.md` | hooks rules, tanstack-query for fetching |
+← MMLU ← Conocimiento amplio (eleccion múltiple)
+TEN GPQA TENIDO Razonamiento a nivel de posgrado
+Silencio HumanEval / MBPP Silencio Código generación
+Silencio SWE-bench Silencio Real solución de problemas de reposo - el que importa
+MMLU-Pro tóxico más duro MMLU
+Silencio Chatbot Arena (LMSYS)
+Silencio ARC-AGI
+Silencio MT-Bench Silencio conversación multi-volución
 
-## ✍️ What a great rules file contains
+## 🧰 Eval frameworks
+← Herramienta Silenciosa
+|---|---|
+[lm-eval-harness] (https://github.com/EleutherAI/lm-evaluation-harness) El arnés estándar OSS
+[OpenAI evals] (https://github.com/openai/evals)
+Silencio [DeepEval] (https://github.com/confident-ai/deepeval)
+[RAGAS] (https://github.com/explodinggradients/ragas)
+Silencio [promptfoo] (https://github.com/promptfoo/promptfoo)
+Silencio [Langfuse] (https://github.com/langfuse/langfuse)
 
-```markdown
-# Project: Acme API
+## 📐 Image/other
+**ImageNet, COCO** — clásicos
+- GenEval, TIFA** - Evalaciones de imagen-gen
+- **ASR (WER)** - tasa de error de transcripción del discurso
 
-## Stack
-FastAPI + SQLAlchemy async + Postgres. Tests: pytest-asyncio.
+Caveats
+- Los puntos de referencia se juegan: compruebe la contaminación y la metodología eval
+- Arena ELO refleja el gusto, no la tarea adecuada - prueba de *su carga*
+- Construir un conjunto de eval interno temprano - 20 ejemplos reales beat leaderboard navegar
 
-## Conventions
-- All endpoints return Pydantic schemas, never dicts
-- DB access only through `db/repositories/`
-- No `print()` — `structlog` only
-- Commits: conventional format (`feat:`, `fix:`)
+## 🆕 Puntos de referencia de fronteras actuales
 
-## Commands
-- Test: `pytest -xvs`
-- Lint: `ruff check --fix`
-- Run dev: `uvicorn app:app --reload`
+← Tests sobre la vida
+|---|---|
+Silencio SWE-bench Verified ← Real GitHub issue fixes ←
+Silencio ARC-AGI Silencio Resumen razonamiento
+Silencio GPQA Silencio Ciencia a nivel de posgrado
+FrontierMath ← Investigación matemáticas
+El último examen de la humanidad Silencioso experto en el dominio cruzado
+← Terminal-Comencé Silencio CLI tareas de agente
 
-## Never do
-- Don't add deps without asking
-- Don't modify migrations by hand — alembic generates them
-- Don't commit `.env`
-```
+## 📊 Live leaderboards
 
-## 🧠 Rules that measurably help (community-tested)
-
-1. **Commands section** — the AI stops guessing how to run tests
-2. **"Never do" list** — negative constraints prevent the worst diffs
-3. **One-file-per-domain** in `.cursor/rules` with globs: `frontend/*.mdc` → `**/*.tsx`
-4. **Link, don't paste** — reference real files: `@src/db/base.py` as the ORM example
-5. **Keep under 150 lines** — longer rules get ignored/truncated
+- [LMArena] (https://lmarena.ai/) - preferencia humana ciega
+- [Análisis Artificial] (https://artificialanalysis.ai/) - velocidad/costo/calidad
+- [LiveBench] (https://livebench.ai/) - sin contaminación
+- [Open LLM Leaderboard] (https://huggingface.co/spaces/open-llm-leaderboard) - HF's
 
 ---
 ## Contribuir
